@@ -18,7 +18,7 @@ def cifra_de_cesar(message, k):
 
 with open('./texto.txt', 'r', encoding='utf-8') as importedText:
     text = importedText.read()
-message = re.sub(r'[^a-zA-Z0-9\s]', '', text).lower().replace(' ','')
+message = re.sub(r'[^a-zA-Z0-9\s]', '', text).lower().replace(' ','').replace('\n','')
 key = 3
 encrypted_message = cifra_de_cesar(message, key)
 
