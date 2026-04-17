@@ -54,9 +54,15 @@ if __name__ == "__main__":
     cypher_blocks = []
     current_iv = init_vector
     
-    for block in blocks:
+    print("=== ENCRIPTAÇÃO CFB ===")
+    for i, block in enumerate(blocks):
         keystream = encondingBlock(current_iv, key)
         c_block = xorBlock(keystream, block)
+        print(f"Bloco {i + 1}: '{block}'")
+        print(f"Vetor de Inicialização: '{current_iv}'")
+        print(f"Chave: '{key}'")
+        print(f"Bloco Codificado: '{c_block.encode()}'")
+        print()
         cypher_blocks.append(c_block)
         current_iv = c_block
 
@@ -66,9 +72,15 @@ if __name__ == "__main__":
     decoded_parts = []
     current_iv = init_vector
     
-    for c_block in cypher_blocks:
+    print("=== DECRIPTAÇÃO CFB ===")
+    for i, c_block in enumerate(cypher_blocks):
         keystream = encondingBlock(current_iv, key)
         p_block = xorBlock(keystream, c_block)
+        print(f"Bloco {i + 1}: '{c_block.encode()}'")
+        print(f"Vetor de Inicialização: '{current_iv}'")
+        print(f"Chave: '{key}'")
+        print(f"Bloco Decriptado: '{p_block}'")
+        print()
         decoded_parts.append(p_block)
         current_iv = c_block
 

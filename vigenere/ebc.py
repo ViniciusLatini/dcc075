@@ -49,15 +49,27 @@ if __name__ == "__main__":
     blocks = addPadding(blocks)
     print("blocks with padding:", blocks)
     cipher = ""
-    for block in blocks:
-        cipher += encondingBlock(block, key)
+    print("\n=== ENCRIPTAÇÃO ===")
+    for i, block in enumerate(blocks):
+        encoded = encondingBlock(block, key)
+        print(f"Bloco {i + 1}: '{block}'")
+        print(f"Chave: '{key}'")
+        print(f"Bloco Codificado: '{encoded}'")
+        print()
+        cipher += encoded
     print("cipher:", cipher)
     
     blocksEncoded = splitBlocks(cipher)
     print("blocks encoded:", blocksEncoded)
     decoded = ""
-    for block in blocksEncoded:
-        decoded += decodingBlock(block, key)
+    print("\n=== DECRIPTAÇÃO ===")
+    for i, block in enumerate(blocksEncoded):
+        decoded_block = decodingBlock(block, key)
+        print(f"Bloco {i + 1}: '{block}'")
+        print(f"Chave: '{key}'")
+        print(f"Bloco Decriptado: '{decoded_block}'")
+        print()
+        decoded += decoded_block
     if len(decoded) > text_size:
         decoded = decoded[:text_size]
     print("decoded:", decoded)
