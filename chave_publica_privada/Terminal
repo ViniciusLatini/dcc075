@@ -1,0 +1,36 @@
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança$ cd Alex/
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ openssl rand -out secret.key 128
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ ls
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ openssl aes-256-cbc -in file.txt -out file.txt.enc -pass file:secret.key 
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ ls
+chaveAlex.key  chaveAlexPub.pub  chaveBobPub.pub  file.txt  file.txt.enc  secret.key
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ openssl rsautl -encrypt -oaep -pubin -inkey chaveBobPub.pub -in secret.key -out secret.key.enc
+The command rsautl was deprecated in version 3.0. Use 'pkeyutl' instead.
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ ls
+chaveAlex.key  chaveAlexPub.pub  chaveBobPub.pub  file.txt  file.txt.enc  secret.key  secret.key.enc
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ rm.secretkey
+rm.secretkey: comando não encontrado
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ cd .
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ cd ..
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança$ cd Bob/
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ cd ..
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança$ cd Alex/
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ mv secret.key.enc ../Bob
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ mv file.txt.enc ../Bob
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Alex$ cd ../Bob
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ ls
+chaveAlexPub.pub  chaveBob.key  chaveBobPub.pub  file.txt.enc  secret.key.enc
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$  openssl rsautl -decrypt -oaep -inkey chaveBob.key -in secret.key.enc -out secret.key
+The command rsautl was deprecated in version 3.0. Use 'pkeyutl' instead.
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ openssl aes-256-cbc -d -in file.txt.enc -out saida.pdf -pass file:secret.key
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ ls
+chaveAlexPub.pub  chaveBob.key  chaveBobPub.pub  file.txt.enc  saida.pdf  secret.key  secret.key.enc
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ rm saida.pdf 
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$ openssl aes-256-cbc -d -in file.txt.enc -out file.txt -pass file:secret.key
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+mateus@mateus-340XAA-350XAA-550XAA:~/Downloads/Mateus_Segurança/Bob$
